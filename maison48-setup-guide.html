@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON48 — Setup Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141210;
+    --cream: #f5f1eb;
+    --off: #ede8df;
+    --rule: #d8d2c4;
+    --muted: #888068;
+    --pale: #c8c2b0;
+    --green: #1d6b4a;
+    --red: #b03020;
+    --amber: #8a5c00;
+    --blue: #1a4a7a;
+    --r: 8px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--ink);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-wordmark {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    color: #f5f1eb;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2px;
+  }
+  .nav-links a {
+    color: #888068;
+    text-decoration: none;
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: color .15s, background .15s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: #f5f1eb;
+    background: rgba(255,255,255,.07);
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--rule); }
+  .page-header-eyebrow {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .page-title {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .page-sub { font-size: 15px; color: var(--muted); }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 56px; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--pale);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  p { font-size: 13.5px; color: #4a4740; line-height: 1.75; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 700px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .page { padding: 28px 20px 60px; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--r);
+    padding: 20px 22px;
+  }
+  .card-sm { padding: 14px 16px; }
+  .stat-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--r);
+    padding: 16px 18px;
+  }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-note { font-size: 11px; color: var(--muted); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    padding: 14px 18px;
+    border-radius: var(--r);
+    font-size: 13px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+  .callout-green { background: #eaf4ef; border-left: 3px solid var(--green); color: var(--green); }
+  .callout-red { background: #fdf0ee; border-left: 3px solid var(--red); color: var(--red); }
+  .callout-amber { background: #fdf5e0; border-left: 3px solid #d4a017; color: var(--amber); }
+  .callout-blue { background: #eef3fa; border-left: 3px solid var(--blue); color: var(--blue); }
+  .callout-gray { background: var(--off); border-left: 3px solid var(--rule); color: #4a4740; }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .b-green { background: #eaf4ef; color: var(--green); }
+  .b-red { background: #fdf0ee; color: var(--red); }
+  .b-amber { background: #fdf5e0; color: var(--amber); }
+  .b-blue { background: #eef3fa; color: var(--blue); }
+  .b-gray { background: var(--off); color: var(--muted); }
+  .b-dark { background: var(--ink); color: #fff; }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    text-align: left;
+    padding: 8px 14px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    background: var(--off);
+  }
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--off);
+    color: #4a4740;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #faf8f5; }
+  td.strong { font-weight: 600; color: var(--ink); }
+  td.muted { color: var(--muted); font-size: 12px; }
+  tr.total td { font-weight: 700; background: var(--off); border-top: 2px solid var(--rule); }
+
+  /* ── OWNERSHIP BARS ── */
+  .own-bar { margin-bottom: 18px; }
+  .own-bar-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .own-bar-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .own-bar-pct { font-size: 22px; font-weight: 300; color: var(--ink); }
+  .own-bar-track { height: 10px; background: var(--off); border-radius: 5px; overflow: hidden; margin-bottom: 4px; }
+  .own-bar-fill { height: 100%; border-radius: 5px; }
+  .own-bar-meta { font-size: 11px; color: var(--muted); }
+
+  /* ── STACKED BAR ── */
+  .stacked { height: 28px; border-radius: 5px; overflow: hidden; display: flex; margin: 10px 0 4px; }
+  .stacked-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
+
+  /* ── SCENARIO ── */
+  .sc-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--off); }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row.highlight { background: var(--off); padding: 8px 10px; border-radius: var(--r); border: 1.5px solid var(--rule); margin: 4px 0; }
+  .sc-pct { font-size: 12px; font-weight: 600; color: #4a4740; min-width: 72px; }
+  .sc-track { height: 7px; background: var(--off); border-radius: 4px; flex: 1; overflow: hidden; }
+  .sc-fill { height: 100%; border-radius: 4px; }
+  .sc-note { font-size: 12px; color: var(--muted); min-width: 210px; }
+  .sc-note.active { color: var(--ink); font-weight: 600; }
+
+  /* ── TIMELINE ── */
+  .tl-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .tl-item:last-child { border-bottom: 1px solid var(--rule); }
+  .tl-phase { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  .tl-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+  .tl-body { font-size: 12.5px; color: #4a4740; line-height: 1.65; margin-bottom: 8px; }
+  .tl-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  /* ── ORG CHART ── */
+  .org { display: flex; flex-direction: column; align-items: center; }
+  .org-node {
+    border: 1.5px solid var(--rule);
+    border-radius: 6px;
+    padding: 10px 22px;
+    text-align: center;
+    background: #fff;
+    min-width: 200px;
+  }
+  .org-node.top { background: var(--ink); border-color: var(--ink); }
+  .org-node.top .org-title { color: #fff; }
+  .org-node.top .org-sub { color: rgba(255,255,255,.5); }
+  .org-node.mid { background: var(--off); }
+  .org-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .org-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .org-line { width: 1.5px; height: 18px; background: var(--rule); margin: 0 auto; }
+  .org-branch { display: flex; gap: 8px; justify-content: center; width: 100%; }
+  .org-branch-item { display: flex; flex-direction: column; align-items: center; }
+  .org-dept {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 8px 12px;
+    background: var(--off);
+    text-align: center;
+    min-width: 110px;
+  }
+  .org-dept-title { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .org-dept-sub { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  .org-sub-node {
+    border: 1px solid var(--off);
+    border-radius: 4px;
+    padding: 4px 10px;
+    background: #fff;
+    text-align: center;
+    min-width: 104px;
+    margin-top: 4px;
+  }
+  .org-sub-node-title { font-size: 10.5px; color: var(--muted); }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--off);
+    cursor: pointer;
+    user-select: none;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--rule);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+  }
+  .check-box.done { background: var(--green); border-color: var(--green); }
+  .check-tick { display: none; }
+  .check-box.done .check-tick { display: block; }
+  .check-text { flex: 1; font-size: 13px; color: #4a4740; }
+  .check-text.done { text-decoration: line-through; color: var(--muted); }
+  .check-cat { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .progress-wrap { margin-bottom: 18px; }
+  .progress-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .progress-track { height: 6px; background: var(--off); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width .3s; }
+
+  /* ── RISK ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+  .risk-card { padding: 16px 18px; border-radius: 4px; }
+  .risk-card.high { background: var(--ink); }
+  .risk-card.med { background: var(--off); border: 1px solid var(--rule); }
+  .risk-card.low { background: #fff; border: 1px solid var(--off); }
+  .risk-lbl { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 5px; }
+  .risk-card.high .risk-lbl { color: var(--muted); }
+  .risk-card.med .risk-lbl, .risk-card.low .risk-lbl { color: var(--muted); }
+  .risk-title { font-size: 13.5px; font-weight: 600; line-height: 1.3; margin-bottom: 5px; }
+  .risk-card.high .risk-title { color: var(--cream); }
+  .risk-card.med .risk-title { color: var(--ink); }
+  .risk-card.low .risk-title { color: var(--muted); }
+  .risk-body { font-size: 12px; line-height: 1.6; }
+  .risk-card.high .risk-body { color: var(--muted); }
+  .risk-card.med .risk-body { color: #4a4740; }
+  .risk-card.low .risk-body { color: var(--pale); }
+  @media (max-width: 600px) { .risk-grid { grid-template-columns: 1fr; } }
+
+  /* ── EXEC TABLE ── */
+  .exec-risk { display: flex; gap: 3px; margin-top: 4px; }
+  .rdot { width: 8px; height: 8px; border-radius: 50%; }
+  .rdot-on { background: var(--red); }
+  .rdot-mid { background: var(--amber); }
+  .rdot-off { background: var(--rule); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--muted);
+    text-align: center;
+    padding: 28px 40px;
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    line-height: 1.8;
+  }
+  footer a { color: var(--pale); text-decoration: none; }
+
+  /* ── PRINT ── */
+  @media print {
+    nav, footer { display: none; }
+    .page { padding: 0; max-width: 100%; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <svg width="28" height="32" viewBox="0 0 80 80" fill="none">
+      <polyline points="4,36 20,14 36,36" stroke="#f5f1eb" stroke-width="2" fill="none" stroke-linecap="square"/>
+      <line x1="44" y1="17" x2="44" y2="32" stroke="#888068" stroke-width="0.9"/>
+      <text x="50" y="23" font-family="sans-serif" font-size="10" fill="#f5f1eb">4</text>
+      <text x="50" y="35" font-family="sans-serif" font-size="10" fill="#f5f1eb">8</text>
+      <text x="4" y="56" font-family="sans-serif" font-size="7.5" fill="#888068" letter-spacing="0.26em">MAISON</text>
+    </svg>
+    <span class="nav-wordmark">MAISON48 Setup Guide</span>
+  </a>
+  <div class="nav-links">
+    <a href="#overview" class="active">ภาพรวม</a>
+    <a href="#ownership">การถือหุ้น</a>
+    <a href="#governance">กฎหมาย</a>
+    <a href="#timeline">ไทม์ไลน์</a>
+    <a href="#team">ทีม</a>
+    <a href="#finance">การเงิน</a>
+    <a href="#checklist">Checklist</a>
+    <a href="#risk">Risk</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-eyebrow">MAISON48 Co., Ltd. · Bangkok · March 2026</div>
+    <div class="page-title">Setup Guide</div>
+    <div class="page-sub">คู่มือจัดตั้ง MarTech Agency ร่วมกับมหาวิทยาลัยหอการค้าไทย — Confidential</div>
+  </div>
+
+  <!-- ── OVERVIEW ── -->
+  <section id="overview">
+    <div class="section-label">ภาพรวม</div>
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="stat-card"><div class="stat-label">ทุนจดทะเบียน</div><div class="stat-value">฿2M</div><div class="stat-note">200,000 หุ้น · ฿10/หุ้น</div></div>
+      <div class="stat-card"><div class="stat-label">สัดส่วนมหาลัย</div><div class="stat-value">30%</div><div class="stat-note">Passive · เพดาน 49%</div></div>
+      <div class="stat-card"><div class="stat-label">Core Team Day 1</div><div class="stat-value">6</div><div class="stat-note">คน · MD + 4 Lead + BD</div></div>
+      <div class="stat-card"><div class="stat-label">เป้า Clients ปีแรก</div><div class="stat-value">8</div><div class="stat-note">ราย · ฿2.5M รายได้</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:10px;">MAISON48 คืออะไร</h3>
+        <p style="margin-bottom:12px;">MarTech Agency บริษัทจำกัด 1 แห่ง ไม่มี subsidiary 4 สายบริการในองค์กรเดียว: <strong>Marketing Technology</strong> · <strong>Creative</strong> · <strong>Strategy</strong> · <strong>Training</strong></p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span class="badge b-blue">Marketing Tech</span>
+          <span class="badge b-gray">Creative</span>
+          <span class="badge b-green">Strategy</span>
+          <span class="badge b-amber">Training</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">ความสัมพันธ์กับมหาวิทยาลัย</h3>
+        <div class="callout callout-blue" style="margin-bottom:8px;"><strong>บทบาท 1 — ผู้ถือหุ้น (Passive)</strong><br>ถือหุ้น ≤49% รับปันผล ไม่เข้าบริหารรายวัน</div>
+        <div class="callout callout-green" style="margin-bottom:8px;"><strong>บทบาท 2 — ลูกค้า (Client)</strong><br>ว่าจ้าง MAISON48 ผ่าน MOU ในราคาตลาด</div>
+        <div class="callout callout-red"><strong>ห้ามสับสน:</strong> ต้องแยกสองบทบาทนี้ให้ชัดเสมอ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OWNERSHIP ── -->
+  <section id="ownership">
+    <div class="section-label">สัดส่วนการถือหุ้น</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:18px;">Cap Table</h3>
+        <div class="own-bar">
+          <div class="own-bar-head"><span class="own-bar-name">ผู้ก่อตั้ง / เอกชน</span><span class="own-bar-pct">70%</span></div>
+          <div class="own-bar-track"><div class="own-bar-fill" style="width:70%;background:var(--ink);"></div></div>
+          <div class="own-bar-meta">140,000 หุ้น · ฿1,400,000 · Controlling interest</div>
+        </div>
+        <div class="own-bar">
+          <div class="own-bar-head"><span class="own-bar-name">มหาวิทยาลัยหอการค้าไทย</span><span class="own-bar-pct">30%</span></div>
+          <div class="own-bar-track"><div class="own-bar-fill" style="width:30%;background:var(--muted);"></div></div>
+          <div class="own-bar-meta">60,000 หุ้น · ฿600,000 · Passive investment</div>
+        </div>
+        <div>
+          <div style="font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Voting Rights</div>
+          <div class="stacked">
+            <div class="stacked-seg" style="width:70%;background:var(--ink);color:#fff;">Founders 70%</div>
+            <div class="stacked-seg" style="width:30%;background:var(--muted);color:rgba(255,255,255,.8);">UTCC 30%</div>
+          </div>
+        </div>
+        <hr>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ผู้ถือหุ้น</th><th>หุ้น</th><th>%</th><th>มูลค่า</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">ผู้ก่อตั้ง</td><td class="muted">140,000</td><td class="strong">70%</td><td class="muted">฿1,400,000</td></tr>
+              <tr><td class="strong">มหาวิทยาลัย</td><td class="muted">60,000</td><td class="strong">30%</td><td class="muted">฿600,000</td></tr>
+              <tr class="total"><td>รวม</td><td>200,000</td><td>100%</td><td>฿2,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Scenarios — ผลลัพธ์ตามสัดส่วน</h3>
+        <div>
+          <div class="sc-row">
+            <span class="sc-pct">≤ 24%</span>
+            <div class="sc-track"><div class="sc-fill" style="width:24%;background:var(--rule);"></div></div>
+            <span class="sc-note">Passive — ไม่มีอำนาจ block</span>
+          </div>
+          <div class="sc-row">
+            <span class="sc-pct">25–33%</span>
+            <div class="sc-track"><div class="sc-fill" style="width:33%;background:var(--pale);"></div></div>
+            <span class="sc-note">Significant — block วาระพิเศษ</span>
+          </div>
+          <div class="sc-row highlight">
+            <span class="sc-pct" style="color:var(--ink);">30% ← เลือก</span>
+            <div class="sc-track"><div class="sc-fill" style="width:30%;background:var(--ink);"></div></div>
+            <span class="sc-note active">สมดุลอิทธิพลและกฎหมาย</span>
+          </div>
+          <div class="sc-row">
+            <span class="sc-pct">34–49%</span>
+            <div class="sc-track"><div class="sc-fill" style="width:49%;background:#4a4740;"></div></div>
+            <span class="sc-note">Strong minority</span>
+          </div>
+          <div class="sc-row">
+            <span class="sc-pct" style="color:var(--red);">≥ 50%</span>
+            <div class="sc-track"><div class="sc-fill" style="width:50%;background:var(--red);"></div></div>
+            <span class="sc-note" style="color:var(--red);">ห้าม — ผิดระเบียบ</span>
+          </div>
+        </div>
+        <hr>
+        <h3 style="margin-bottom:8px;">Dividend Policy</h3>
+        <p>ปีที่ 1–2: ไม่จ่าย นำกำไรกลับลงทุน<br>ปีที่ 3+: สูงสุด 40% หากกำไรสะสม ≥ ฿1M<br>มหาลัยรับตามสัดส่วน → นำสมทบกองทุนการศึกษา</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GOVERNANCE ── -->
+  <section id="governance">
+    <div class="section-label">กฎหมาย &amp; Governance</div>
+    <div class="callout callout-amber" style="margin-bottom:20px;"><strong>4 ข้อที่ห้ามข้าม ก่อน Day 1</strong> — ไม่มีข้อยกเว้น ทำทีละขั้นตามลำดับ</div>
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card">
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">01 · พ.ร.บ.สถาบันอุดมศึกษาเอกชน 2546</div>
+        <h3>มติสภามหาวิทยาลัย</h3>
+        <p>อนุมัติการลงทุนถือหุ้นและบันทึกในรายงานการประชุมอย่างเป็นทางการ ผู้บริหารที่มีส่วนได้เสียต้องงดออกเสียง (Recuse) ในวาระนั้นทุกครั้ง</p>
+      </div>
+      <div class="card">
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">02 · ระเบียบ COI มหาวิทยาลัย</div>
+        <h3>Declaration of Interest <span class="badge b-green" style="vertical-align:middle;">พร้อมแล้ว</span></h3>
+        <p>ลงนามก่อนเปิดบริษัท ต่ออายุทุกปีมกราคม บันทึกวาระที่งดออกเสียงทุกครั้ง จัดเก็บโดยสำนักงานสภามหาวิทยาลัย</p>
+      </div>
+      <div class="card">
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">03 · ป.พ.พ. &amp; หลักการ Arm's Length</div>
+        <h3>MOU ราคาตลาด <span class="badge b-green" style="vertical-align:middle;">พร้อมแล้ว</span></h3>
+        <p>ทุกสัญญากับมหาลัยต้องใช้ราคาตลาด เทียบกับผู้ให้บริการอื่น ≥ 2 ราย แจ้งล่วงหน้า 90 วันก่อนยกเลิก</p>
+      </div>
+      <div class="card">
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">04 · PDPA &amp; IP</div>
+        <h3>ข้อมูลและทรัพย์สินทางปัญญา</h3>
+        <p>จดทะเบียน TM "MAISON48" ก่อนเปิดตัว ห้ามใช้ข้อมูลนักศึกษาเพื่อพาณิชย์ ต้องมี DPA ทุกครั้งที่เข้าถึงข้อมูลมหาลัย</p>
+      </div>
+    </div>
+
+    <!-- Exec as founder -->
+    <h2>ผู้บริหารมหาลัยในฐานะผู้ก่อตั้ง</h2>
+    <div class="callout callout-amber" style="margin-bottom:16px;">ทำได้ — แต่ระดับความเสี่ยงและเงื่อนไขต่างกันตามตำแหน่ง</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:16%;">ตำแหน่ง</th><th style="width:14%;">ความเสี่ยง</th><th style="width:38%;">เงื่อนไขที่ต้องปฏิบัติ</th><th>ห้ามทำ</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong">อธิการบดี</td>
+            <td><div class="exec-risk"><div class="rdot rdot-on"></div><div class="rdot rdot-on"></div><div class="rdot rdot-on"></div></div><div style="font-size:10.5px;color:var(--red);margin-top:3px;">สูงมาก</div></td>
+            <td class="muted">มติสภา · งดออกเสียงทุกวาระ · ไม่ดำรง MD พร้อมกัน · Declaration ทุกปี</td>
+            <td class="muted">อนุมัติสัญญาให้ MAISON48 โดยตรง</td>
+          </tr>
+          <tr>
+            <td class="strong">กรรมการสภา</td>
+            <td><div class="exec-risk"><div class="rdot rdot-on"></div><div class="rdot rdot-on"></div><div class="rdot rdot-on"></div></div><div style="font-size:10.5px;color:var(--red);margin-top:3px;">สูงมาก</div></td>
+            <td class="muted">งดออกเสียงและออกจากห้องทุกวาระ MAISON48 · บันทึกทุกครั้ง</td>
+            <td class="muted">โหวตวาระที่เกี่ยวข้อง</td>
+          </tr>
+          <tr>
+            <td class="strong">รองอธิการบดี</td>
+            <td><div class="exec-risk"><div class="rdot rdot-on"></div><div class="rdot rdot-on"></div><div class="rdot rdot-off"></div></div><div style="font-size:10.5px;color:var(--amber);margin-top:3px;">ปานกลาง</div></td>
+            <td class="muted">Disclose ต่อสภา · ห้ามกำกับงานที่ทับซ้อน · งดออกเสียง</td>
+            <td class="muted">กำกับงานที่ตัวเองถือหุ้น</td>
+          </tr>
+          <tr>
+            <td class="strong">คณบดี</td>
+            <td><div class="exec-risk"><div class="rdot rdot-on"></div><div class="rdot rdot-on"></div><div class="rdot rdot-off"></div></div><div style="font-size:10.5px;color:var(--amber);margin-top:3px;">ปานกลาง</div></td>
+            <td class="muted">ระวังหลักสูตรทับซ้อนกับ Training · แจ้ง HR</td>
+            <td class="muted">ดึงนักศึกษาโดยไม่ผ่านขั้นตอน</td>
+          </tr>
+          <tr>
+            <td class="strong">อาจารย์ประจำ</td>
+            <td><div class="exec-risk"><div class="rdot rdot-mid"></div><div class="rdot rdot-off"></div><div class="rdot rdot-off"></div></div><div style="font-size:10.5px;color:var(--green);margin-top:3px;">ต่ำ</div></td>
+            <td class="muted">แจ้งต้นสังกัด · ชั่วโมงสอนต้องไม่กระทบ · รายได้ไม่เกินเพดาน</td>
+            <td class="muted">ใช้เวลาสอนทำงาน MAISON48</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-green" style="margin-top:14px;"><strong>Safe Harbor</strong> — ปลอดภัยทางกฎหมายถ้ามีครบ: มติสภา · Declaration ลงนาม · งดออกเสียงทุกวาระ · Arm's Length ทุกสัญญา</div>
+  </section>
+
+  <!-- ── TIMELINE ── -->
+  <section id="timeline">
+    <div class="section-label">ไทม์ไลน์ 4 Phases</div>
+    <div class="grid-4" style="margin-bottom:20px;">
+      <div class="stat-card" style="border-top:3px solid #7c73d4;"><div class="stat-label">Phase 0</div><div class="stat-value" style="font-size:16px;">เดือน 1–2</div><div class="stat-note">Prerequisite</div></div>
+      <div class="stat-card" style="border-top:3px solid var(--green);"><div class="stat-label">Phase 1</div><div class="stat-value" style="font-size:16px;">เดือน 2–3</div><div class="stat-note">Incorporate</div></div>
+      <div class="stat-card" style="border-top:3px solid var(--amber);"><div class="stat-label">Phase 2</div><div class="stat-value" style="font-size:16px;">เดือน 3–6</div><div class="stat-note">Soft Launch</div></div>
+      <div class="stat-card" style="border-top:3px solid var(--blue);"><div class="stat-label">Phase 3</div><div class="stat-value" style="font-size:16px;">เดือน 6–12</div><div class="stat-note">Scale</div></div>
+    </div>
+    <div class="card">
+      <div class="tl-item">
+        <div class="tl-phase">เดือน 1–2<br><span style="color:#7c73d4;">Phase 0</span></div>
+        <div><div class="tl-title">Prerequisite — งานก่อนเริ่มทุกอย่าง</div><div class="tl-body">ตรวจสอบระเบียบ COI · ปรึกษาทนายความ พ.ร.บ.อุดมศึกษาเอกชน · เสนอวาระและผ่านมติสภา · ผู้บริหารที่เกี่ยวข้องลงนาม Declaration of Interest · วางแผนเงินทุนและสัดส่วนถือหุ้น</div><div class="tl-tags"><span class="badge b-gray">กฎหมาย</span><span class="badge b-gray">สภา</span><span class="badge b-gray">COI</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">เดือน 2–3<br><span style="color:var(--green);">Phase 1</span></div>
+        <div><div class="tl-title">Incorporate — จัดตั้งโครงสร้างกฎหมาย</div><div class="tl-body">จดทะเบียนบริษัทที่ DBD · เปิดบัญชีธนาคารแยก · ลงนาม MOU · จดทะเบียน TM "MAISON48" · ร่าง IP Agreement · ทำ DPA ตาม PDPA · จ้างผู้ทำบัญชีอิสระ · วาง Transfer Pricing Policy</div><div class="tl-tags"><span class="badge b-gray">จดทะเบียน DBD</span><span class="badge b-gray">IP &amp; PDPA</span><span class="badge b-gray">MOU</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">เดือน 3–6<br><span style="color:var(--amber);">Phase 2</span></div>
+        <div><div class="tl-title">Soft Launch — เปิดดำเนินการ</div><div class="tl-body">แต่งตั้ง MD ที่ไม่ดำรงตำแหน่งในมหาวิทยาลัย · จ้าง Core Team 6 คน · ปิดงานแรกจากมหาลัย (MOU ราคาตลาด) · ขยายไป SME เครือข่ายหอการค้า · จดทะเบียน VAT · Training Workshop ครั้งแรก</div><div class="tl-tags"><span class="badge b-gray">First Clients</span><span class="badge b-gray">Team Build</span><span class="badge b-gray">VAT</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-phase">เดือน 6–12<br><span style="color:var(--blue);">Phase 3</span></div>
+        <div><div class="tl-title">Scale — ขยายธุรกิจ</div><div class="tl-body">ขยายสู่ Corporate Clients · พัฒนา Proprietary MarTech Tools · สร้าง Retainer Contracts · รายงานสถานะต่อสภามหาวิทยาลัยครั้งแรก · ทบทวน MOU และ Pricing Policy</div><div class="tl-tags"><span class="badge b-gray">Growth</span><span class="badge b-gray">Annual Review</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TEAM ── -->
+  <section id="team">
+    <div class="section-label">โครงสร้างทีม</div>
+    <div class="grid-4" style="margin-bottom:20px;">
+      <div class="stat-card"><div class="stat-label">Day 1</div><div class="stat-value">6</div><div class="stat-note">Core team</div></div>
+      <div class="stat-card"><div class="stat-label">สิ้น Q2</div><div class="stat-value">9–11</div><div class="stat-note">คน</div></div>
+      <div class="stat-card"><div class="stat-label">ปีที่ 2</div><div class="stat-value">15–18</div><div class="stat-note">คน</div></div>
+      <div class="stat-card"><div class="stat-label">Consultant</div><div class="stat-value" style="font-size:16px;">Part-time</div><div class="stat-note">ผ่าน HR มหาลัยเท่านั้น</div></div>
+    </div>
+    <div class="card">
+      <div class="org">
+        <div class="org-node top" style="min-width:220px;"><div class="org-title">Board of Directors</div><div class="org-sub">กรรมการอิสระ ≥1 คน — ไม่ใช่บุคลากรมหาลัย</div></div>
+        <div class="org-line"></div>
+        <div class="org-node mid" style="min-width:220px;"><div class="org-title">Managing Director</div><div class="org-sub">ไม่ดำรงตำแหน่งในมหาลัยพร้อมกัน</div></div>
+        <div class="org-line"></div>
+        <div class="org-branch">
+          <div class="org-branch-item"><div class="org-line" style="height:12px;"></div><div class="org-dept"><div class="org-dept-title">MarTech</div><div class="org-dept-sub">CRM · Analytics</div></div><div class="org-line" style="height:8px;"></div><div class="org-sub-node"><div class="org-sub-node-title">Tech Lead + Analyst</div></div></div>
+          <div class="org-branch-item"><div class="org-line" style="height:12px;"></div><div class="org-dept"><div class="org-dept-title">Creative</div><div class="org-dept-sub">Brand · Content</div></div><div class="org-line" style="height:8px;"></div><div class="org-sub-node"><div class="org-sub-node-title">Art Dir + Copy</div></div></div>
+          <div class="org-branch-item"><div class="org-line" style="height:12px;"></div><div class="org-dept"><div class="org-dept-title">Strategy</div><div class="org-dept-sub">Research · Insight</div></div><div class="org-line" style="height:8px;"></div><div class="org-sub-node"><div class="org-sub-node-title">Strategist + Analyst</div></div></div>
+          <div class="org-branch-item"><div class="org-line" style="height:12px;"></div><div class="org-dept"><div class="org-dept-title">Training</div><div class="org-dept-sub">Workshops</div></div><div class="org-line" style="height:8px;"></div><div class="org-sub-node"><div class="org-sub-node-title">Trainer + Curriculum</div></div></div>
+        </div>
+        <div style="margin-top:12px;border-top:1.5px dashed var(--rule);padding-top:10px;width:100%;display:flex;gap:8px;justify-content:center;">
+          <div class="org-sub-node" style="min-width:130px;"><div class="org-sub-node-title" style="font-weight:600;color:#4a4740;">BD / Business Dev</div></div>
+          <div class="org-sub-node" style="min-width:130px;"><div class="org-sub-node-title" style="font-weight:600;color:#4a4740;">Finance &amp; Admin</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINANCE ── -->
+  <section id="finance">
+    <div class="section-label">แผนการเงิน</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">P&amp;L Projection — ปีที่ 1</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>รายการ</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>รวม</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">รายได้</td><td>250K</td><td>500K</td><td>750K</td><td>1M</td><td class="strong">2.5M</td></tr>
+              <tr><td>ต้นทุนบริการ (55%)</td><td style="color:var(--muted);">(138K)</td><td style="color:var(--muted);">(275K)</td><td style="color:var(--muted);">(413K)</td><td style="color:var(--muted);">(550K)</td><td style="color:var(--muted);">(1.38M)</td></tr>
+              <tr><td>เงินเดือน</td><td style="color:var(--muted);">(350K)</td><td style="color:var(--muted);">(420K)</td><td style="color:var(--muted);">(490K)</td><td style="color:var(--muted);">(560K)</td><td style="color:var(--muted);">(1.82M)</td></tr>
+              <tr><td>ค่าดำเนินงาน</td><td style="color:var(--muted);">(80K)</td><td style="color:var(--muted);">(80K)</td><td style="color:var(--muted);">(100K)</td><td style="color:var(--muted);">(100K)</td><td style="color:var(--muted);">(360K)</td></tr>
+              <tr class="total"><td>EBIT</td><td style="color:var(--red);">(318K)</td><td style="color:var(--red);">(275K)</td><td style="color:var(--red);">(253K)</td><td style="color:var(--red);">(210K)</td><td style="color:var(--red);">(1.056M)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-gray" style="margin-top:12px;font-size:12px;"><strong>หมายเหตุ:</strong> ปีที่ 1 คาดขาดทุน ฿1.056M · ต้องสำรองทุน ≥ ฿1.5M · Break-even เมื่อ Clients ≥ 12 ราย (ปีที่ 2)</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Client Strategy ปีแรก</h3>
+        <div style="margin-bottom:16px;">
+          <div style="background:var(--off);border-radius:6px;padding:12px 14px;margin-bottom:8px;">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Segment A · Q1–Q2</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px;">มหาวิทยาลัยหอการค้าไทย</div>
+            <div style="font-size:12px;color:#4a4740;">Anchor Client ผ่าน MOU ราคาตลาด</div>
+            <div style="font-size:16px;font-weight:300;margin-top:5px;">฿150–300K <span style="font-size:11px;color:var(--muted);">/ โปรเจค</span></div>
+          </div>
+          <div style="background:var(--off);border-radius:6px;padding:12px 14px;margin-bottom:8px;">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Segment B · Q2–Q3</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px;">SME เครือข่ายหอการค้าไทย</div>
+            <div style="font-size:12px;color:#4a4740;">เข้าถึงผ่าน Alumni และผู้บริหาร</div>
+            <div style="font-size:16px;font-weight:300;margin-top:5px;">฿80–200K <span style="font-size:11px;color:var(--muted);">/ โปรเจค</span></div>
+          </div>
+          <div style="background:var(--off);border-radius:6px;padding:12px 14px;">
+            <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Segment C · Q3–Q4</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px;">Corporate &amp; Brand</div>
+            <div style="font-size:12px;color:#4a4740;">หลังมี Portfolio และ Reputation</div>
+            <div style="font-size:16px;font-weight:300;margin-top:5px;">฿200–500K <span style="font-size:11px;color:var(--muted);">/ โปรเจค</span></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);border-top:1px solid var(--rule);padding-top:10px;">Pipeline: 50 Prospects → 35 Pitched → 20 Proposal → <strong style="color:var(--ink);">8 Won</strong> (Win Rate ~40%)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHECKLIST ── -->
+  <section id="checklist">
+    <div class="section-label">Master Checklist</div>
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-labels"><span id="check-label">0 / 12 รายการ</span><span id="check-pct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+      <div id="checklist">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">ตรวจสอบระเบียบ Conflict of Interest ของมหาวิทยาลัย</div><div class="check-cat">กฎหมาย · Phase 0</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">ปรึกษาทนายความที่ชำนาญ พ.ร.บ.อุดมศึกษาเอกชน</div><div class="check-cat">กฎหมาย · Phase 0</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">ผ่านมติสภามหาวิทยาลัย (มีบันทึกรายงานการประชุม)</div><div class="check-cat">กำกับดูแล · Phase 0</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">ผู้บริหารที่เกี่ยวข้องลงนาม Declaration of Interest</div><div class="check-cat">กำกับดูแล · Phase 0</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">จดทะเบียนบริษัท MAISON48 Co., Ltd. ที่ DBD</div><div class="check-cat">กฎหมาย · Phase 1</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">เปิดบัญชีธนาคารแยกต่างหากจากมหาวิทยาลัย</div><div class="check-cat">การเงิน · Phase 1</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">จดทะเบียนเครื่องหมายการค้า "MAISON48"</div><div class="check-cat">IP · Phase 1</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">ร่างและลงนาม MOU ระหว่างมหาวิทยาลัยกับ MAISON48</div><div class="check-cat">กำกับดูแล · Phase 1</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">ทำ Data Processing Agreement (DPA) ตาม PDPA</div><div class="check-cat">กฎหมาย · Phase 1</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">จ้างผู้ทำบัญชีอิสระ + วาง Transfer Pricing Policy</div><div class="check-cat">การเงิน · Phase 1</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">แต่งตั้ง MD ที่แยกจากตำแหน่งในมหาวิทยาลัย</div><div class="check-cat">กำกับดูแล · Phase 2</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><svg class="check-tick" width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L4 7L9 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="check-text">จดทะเบียน VAT (หากประมาณรายได้เกิน ฿1.8M/ปี)</div><div class="check-cat">การเงิน · Phase 2</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RISK ── -->
+  <section id="risk">
+    <div class="section-label">Risk Matrix</div>
+    <div class="risk-grid">
+      <div class="risk-card high"><div class="risk-lbl">ความเสี่ยงสูงมาก</div><div class="risk-title">ไม่มีมติสภามหาวิทยาลัย</div><div class="risk-body">ฐานทางกฎหมายไม่มั่นคง ยากแก้ไขภายหลัง<br><br><strong style="color:#f5f1eb;">Mitigation:</strong> ผ่านมติก่อน Day 1 ไม่มีข้อยกเว้น</div></div>
+      <div class="risk-card high"><div class="risk-lbl">ความเสี่ยงสูงมาก</div><div class="risk-title">ใช้ข้อมูลนักศึกษาเพื่อพาณิชย์</div><div class="risk-body">โทษทางกฎหมาย PDPA ทำลายความน่าเชื่อถือทั้งสองสถาบัน<br><br><strong style="color:#f5f1eb;">Mitigation:</strong> DPA ก่อนเปิดบริษัท + zero-tolerance</div></div>
+      <div class="risk-card med"><div class="risk-lbl">ความเสี่ยงปานกลาง</div><div class="risk-title">ราคาไม่เป็น Arm's Length</div><div class="risk-body">ถูกมองว่าได้รับสิทธิพิเศษ อาจนำไปสู่การสอบสวน<br><br><strong>Mitigation:</strong> Competitive Bidding ≥2 ราคา ทุกครั้ง</div></div>
+      <div class="risk-card med"><div class="risk-lbl">ความเสี่ยงปานกลาง</div><div class="risk-title">Brand Confusion</div><div class="risk-body">ตลาดเข้าใจว่า MAISON48 คือหน่วยงานมหาลัย<br><br><strong>Mitigation:</strong> Messaging ที่ชัดเจนตั้งแต่วันแรก</div></div>
+      <div class="risk-card low"><div class="risk-lbl">ความเสี่ยงต่ำ</div><div class="risk-title">อาจารย์ Consultant กระทบเวลาสอน</div><div class="risk-body">Mitigation: Policy ชัดเจน + อนุมัติ HR + Cap ชั่วโมง</div></div>
+      <div class="risk-card low"><div class="risk-lbl">ความเสี่ยงต่ำ</div><div class="risk-title">Transfer Pricing Documentation</div><div class="risk-body">Mitigation: ผู้ทำบัญชีที่ดี + Template สัญญา Standard</div></div>
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<footer>
+  MAISON48 Co., Ltd. · Setup Guide · March 2026<br>
+  Confidential — For internal review only · <a href="mailto:hello@maison48.co">hello@maison48.co</a>
+</footer>
+
+<script>
+function toggleCheck(item) {
+  const box = item.querySelector('.check-box');
+  const text = item.querySelector('.check-text');
+  box.classList.toggle('done');
+  text.classList.toggle('done');
+  const total = document.querySelectorAll('.check-item').length;
+  const done = document.querySelectorAll('.check-box.done').length;
+  const pct = Math.round(done / total * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('check-label').textContent = done + ' / ' + total + ' รายการ';
+  document.getElementById('check-pct').textContent = pct + '%';
+}
+// smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

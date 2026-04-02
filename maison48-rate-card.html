@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON48 — MarTech Rate Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141210;
+    --cream: #f5f1eb;
+    --off: #ede8df;
+    --rule: #d8d2c4;
+    --muted: #888068;
+    --pale: #c8c2b0;
+    --green: #1d6b4a;
+    --red: #b03020;
+    --amber: #8a5c00;
+    --blue: #1a4a7a;
+    --r: 8px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--ink);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-wordmark { font-size: 14px; font-weight: 500; letter-spacing: .06em; color: #f5f1eb; }
+  .nav-tabs { display: flex; gap: 2px; }
+  .nav-tab {
+    color: #888068;
+    text-decoration: none;
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all .15s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+  .nav-tab:hover, .nav-tab.active { color: #f5f1eb; background: rgba(255,255,255,.07); }
+
+  /* LAYOUT */
+  .page { max-width: 1000px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  /* TABS */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* HEADER */
+  .page-header { margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+  .page-header-eyebrow { font-size: 10.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .page-title { font-size: 30px; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
+  .page-sub { font-size: 14px; color: var(--muted); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 700px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .page { padding: 24px 18px 60px; }
+    nav { padding: 0 18px; }
+    .nav-tabs { display: none; }
+  }
+
+  /* CARDS */
+  .card { background: #fff; border: 1px solid var(--rule); border-radius: var(--r); padding: 20px 22px; }
+  .stat-card { background: #fff; border: 1px solid var(--rule); border-radius: var(--r); padding: 16px 18px; }
+  .stat-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .stat-value { font-size: 26px; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .stat-note { font-size: 11px; color: var(--muted); }
+
+  /* SECTION */
+  .section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--pale); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  h2 { font-size: 19px; font-weight: 600; color: var(--ink); margin-bottom: 16px; }
+  h3 { font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  p { font-size: 13px; color: #4a4740; line-height: 1.7; }
+  section { margin-bottom: 48px; }
+
+  /* BADGE */
+  .badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+  .b-green { background: #eaf4ef; color: var(--green); }
+  .b-red { background: #fdf0ee; color: var(--red); }
+  .b-amber { background: #fdf5e0; color: var(--amber); }
+  .b-blue { background: #eef3fa; color: var(--blue); }
+  .b-purple { background: #f2eefa; color: #4a2d7a; }
+  .b-teal { background: #eaf5f7; color: #1a5a6a; }
+  .b-gray { background: var(--off); color: var(--muted); }
+  .b-dark { background: var(--ink); color: #fff; }
+
+  /* TABLE */
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; padding: 8px 14px;
+    font-size: 10.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--muted); border-bottom: 1px solid var(--rule); background: var(--off);
+  }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--off); color: #4a4740; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #faf8f5; }
+  td.strong { font-weight: 600; color: var(--ink); }
+  td.muted { color: var(--muted); font-size: 12px; }
+  td.price { font-weight: 700; color: var(--ink); font-size: 13.5px; }
+  tr.cat-row td { background: var(--ink); color: #fff; font-weight: 600; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 7px 14px; }
+  tr.subtotal td { background: var(--off); font-weight: 700; border-top: 2px solid var(--rule); }
+
+  /* BENCHMARK BARS */
+  .bench-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .bench-row:last-child { margin-bottom: 0; }
+  .bench-source { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); min-width: 110px; }
+  .bench-wrap { flex: 1; height: 22px; background: var(--off); border-radius: 4px; overflow: hidden; position: relative; }
+  .bench-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; }
+  .bench-fill-label { font-size: 10.5px; font-weight: 600; color: #fff; white-space: nowrap; }
+  .bench-thb { font-size: 12px; font-weight: 700; color: var(--ink); min-width: 110px; text-align: right; }
+
+  /* CALLOUT */
+  .callout { padding: 12px 16px; border-radius: var(--r); font-size: 12.5px; line-height: 1.65; margin-bottom: 12px; }
+  .callout-amber { background: #fdf5e0; border-left: 3px solid #d4a017; color: var(--amber); }
+  .callout-green { background: #eaf4ef; border-left: 3px solid var(--green); color: var(--green); }
+  .callout-gray { background: var(--off); border-left: 3px solid var(--rule); color: #4a4740; }
+
+  /* CALCULATOR */
+  .svc-item {
+    border: 1px solid var(--rule); border-radius: var(--r); padding: 12px 14px;
+    cursor: pointer; transition: all .15s; display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 8px; background: #fff;
+  }
+  .svc-item:hover { border-color: var(--pale); background: #faf8f5; }
+  .svc-item.selected { border-color: var(--ink); background: var(--ink); color: #fff; }
+  .svc-item .svc-check {
+    width: 16px; height: 16px; border-radius: 3px;
+    border: 1.5px solid var(--rule); flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .svc-item.selected .svc-check { background: #fff; border-color: #fff; }
+  .svc-name { font-size: 13px; font-weight: 600; }
+  .svc-desc { font-size: 11.5px; opacity: .65; margin-top: 1px; }
+  .svc-price-hint { font-size: 11px; opacity: .55; margin-top: 3px; }
+
+  .sl-wrap { margin-bottom: 14px; }
+  .sl-head { display: flex; justify-content: space-between; margin-bottom: 5px; }
+  .sl-name { font-size: 12.5px; font-weight: 500; color: var(--ink); }
+  .sl-val { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  input[type=range] { width: 100%; accent-color: var(--ink); cursor: pointer; }
+
+  .quote-box { background: var(--ink); border-radius: var(--r); padding: 22px 24px; color: #f5f1eb; position: sticky; top: 70px; }
+  .quote-title { font-size: 16px; font-weight: 300; letter-spacing: .04em; margin-bottom: 16px; color: #f5f1eb; }
+  .quote-line { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 12.5px; }
+  .quote-name { color: #c8c2b0; }
+  .quote-amt { font-weight: 600; color: #f5f1eb; }
+  .quote-total { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 0; border-top: 1px solid rgba(255,255,255,.2); margin-top: 8px; }
+  .quote-total-lbl { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #888068; }
+  .quote-total-val { font-size: 28px; font-weight: 300; color: #f5f1eb; }
+  .quote-note { font-size: 10.5px; color: #888068; margin-top: 10px; line-height: 1.65; }
+  .quote-check { font-size: 11px; color: #c8c2b0; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.1); line-height: 1.6; }
+  .quote-check.ok { color: #6dbb8a; }
+
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 700px) { .calc-grid { grid-template-columns: 1fr; } }
+
+  hr { border: none; border-top: 1px solid var(--rule); margin: 28px 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: var(--muted);
+    text-align: center; padding: 26px 40px;
+    font-size: 11.5px; letter-spacing: .06em; line-height: 1.8;
+  }
+  footer a { color: var(--pale); text-decoration: none; }
+
+  @media print { nav, footer { display: none; } .page { padding: 0; max-width: 100%; } section { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">
+    <svg width="28" height="32" viewBox="0 0 80 80" fill="none">
+      <polyline points="4,36 20,14 36,36" stroke="#f5f1eb" stroke-width="2" fill="none" stroke-linecap="square"/>
+      <line x1="44" y1="17" x2="44" y2="32" stroke="#888068" stroke-width="0.9"/>
+      <text x="50" y="23" font-family="sans-serif" font-size="10" fill="#f5f1eb">4</text>
+      <text x="50" y="35" font-family="sans-serif" font-size="10" fill="#f5f1eb">8</text>
+      <text x="4" y="56" font-family="sans-serif" font-size="7.5" fill="#888068" letter-spacing="0.26em">MAISON</text>
+    </svg>
+    <span class="nav-wordmark">MarTech Rate Card</span>
+  </a>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('overview')">ภาพรวม</button>
+    <button class="nav-tab" onclick="showTab('consulting')">Consulting</button>
+    <button class="nav-tab" onclick="showTab('training')">Training</button>
+    <button class="nav-tab" onclick="showTab('stack')">MarTech Stack</button>
+    <button class="nav-tab" onclick="showTab('calc')">Quote Calculator</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-header-eyebrow">MAISON48 · Arm's Length Reference · Thailand 2025–2026</div>
+    <div class="page-title">MarTech Rate Card</div>
+    <div class="page-sub">ราคาตลาดไทยสำหรับบริการ Consulting, Training และ MarTech Stack — ใช้อ้างอิง MOU กับมหาวิทยาลัย</div>
+  </div>
+
+  <!-- ── OVERVIEW ── -->
+  <div class="tab-content active" id="tab-overview">
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="stat-card"><div class="stat-label">ตลาด MarTech ไทย 2025</div><div class="stat-value">$2.98B</div><div class="stat-note">USD · CAGR 24.9%</div></div>
+      <div class="stat-card"><div class="stat-label">งบ MarTech ต่อ Mkt Budget</div><div class="stat-value">46%</div><div class="stat-note">2024 (จาก 10-30% ปี 2023)</div></div>
+      <div class="stat-card"><div class="stat-label">Consulting Day Rate</div><div class="stat-value">15K–45K</div><div class="stat-note">฿/วัน ตาม seniority</div></div>
+      <div class="stat-card"><div class="stat-label">Training (Public, 1 วัน)</div><div class="stat-value">3.5K–25K</div><div class="stat-note">฿/คน ตาม topic</div></div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Day Rate Benchmark (฿/วัน)</h3>
+        <div class="bench-row"><span class="bench-source">Junior (0–3 ปี)</span><div class="bench-wrap"><div class="bench-fill" style="width:35%;background:var(--pale);"><span class="bench-fill-label" style="color:var(--ink);">฿5K–15K</span></div></div><span class="bench-thb">฿5,000–15,000</span></div>
+        <div class="bench-row"><span class="bench-source">Mid (3–6 ปี)</span><div class="bench-wrap"><div class="bench-fill" style="width:55%;background:var(--muted);"><span class="bench-fill-label">฿15K–30K</span></div></div><span class="bench-thb">฿15,000–30,000</span></div>
+        <div class="bench-row"><span class="bench-source">Senior (6+ ปี)</span><div class="bench-wrap"><div class="bench-fill" style="width:78%;background:#4a4740;"><span class="bench-fill-label">฿30K–50K</span></div></div><span class="bench-thb">฿30,000–50,000</span></div>
+        <div class="bench-row"><span class="bench-source">Expert / C-level</span><div class="bench-wrap"><div class="bench-fill" style="width:100%;background:var(--ink);"><span class="bench-fill-label">฿50K–80K+</span></div></div><span class="bench-thb">฿50,000–80,000+</span></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Monthly Retainer (฿/เดือน)</h3>
+        <div class="bench-row"><span class="bench-source">SME (basic)</span><div class="bench-wrap"><div class="bench-fill" style="width:20%;background:var(--pale);"><span class="bench-fill-label" style="color:var(--ink);">15–30K</span></div></div><span class="bench-thb">฿15,000–30,000</span></div>
+        <div class="bench-row"><span class="bench-source">SME (full)</span><div class="bench-wrap"><div class="bench-fill" style="width:38%;background:var(--muted);"><span class="bench-fill-label">30–80K</span></div></div><span class="bench-thb">฿30,000–80,000</span></div>
+        <div class="bench-row"><span class="bench-source">Corporate</span><div class="bench-wrap"><div class="bench-fill" style="width:65%;background:#4a4740;"><span class="bench-fill-label">80–200K</span></div></div><span class="bench-thb">฿80,000–200,000</span></div>
+        <div class="bench-row"><span class="bench-source">Enterprise</span><div class="bench-wrap"><div class="bench-fill" style="width:100%;background:var(--ink);"><span class="bench-fill-label">200–500K+</span></div></div><span class="bench-thb">฿200,000–500,000+</span></div>
+      </div>
+    </div>
+    <div class="callout callout-amber"><strong>หมายเหตุสำหรับ MAISON48:</strong> ราคาที่เสนอแก่มหาวิทยาลัยหอการค้าไทยต้องอยู่ในช่วงนี้ ต้องมีใบเสนอราคาเปรียบเทียบจากเอเจนซี่อื่น ≥2 ราย เพื่อให้เป็น Arm's Length Pricing ตาม MOU</div>
+  </div>
+
+  <!-- ── CONSULTING ── -->
+  <div class="tab-content" id="tab-consulting">
+    <div class="callout callout-gray" style="margin-bottom:20px;">ราคาไม่รวม VAT 7% · ไม่รวม ad spend หรือ license fee ของ tools · ราคาขึ้นอยู่กับความซับซ้อนและ timeline</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:26%;">บริการ</th><th>รายละเอียด</th><th>หน่วย</th><th>ต่ำ</th><th>กลาง</th><th>สูง</th><th>ระดับ</th></tr></thead>
+        <tbody>
+          <tr class="cat-row"><td colspan="7">Strategy &amp; Planning</td></tr>
+          <tr><td class="strong">MarTech Audit &amp; Roadmap</td><td class="muted">ประเมิน stack วางแผน tools</td><td class="muted">โปรเจค</td><td class="price">฿35K</td><td class="price">฿65K</td><td class="price">฿120K</td><td><span class="badge b-amber">Senior</span></td></tr>
+          <tr><td class="strong">Digital Marketing Strategy</td><td class="muted">วางกลยุทธ์ 6–12 เดือน</td><td class="muted">โปรเจค</td><td class="price">฿45K</td><td class="price">฿85K</td><td class="price">฿180K</td><td><span class="badge b-amber">Senior</span></td></tr>
+          <tr><td class="strong">MarTech Stack Consulting</td><td class="muted">แนะนำ tools ตาม budget</td><td class="muted">วัน</td><td class="price">฿18K</td><td class="price">฿28K</td><td class="price">฿45K</td><td><span class="badge b-blue">Mid–Sr</span></td></tr>
+          <tr><td class="strong">Retainer (Strategy)</td><td class="muted">Virtual CMO / MarTech Advisor</td><td class="muted">เดือน</td><td class="price">฿40K</td><td class="price">฿80K</td><td class="price">฿150K</td><td><span class="badge b-amber">Senior</span></td></tr>
+          <tr class="cat-row"><td colspan="7">CRM &amp; Automation</td></tr>
+          <tr><td class="strong">CRM Implementation (HubSpot)</td><td class="muted">Setup, config, migration, automation</td><td class="muted">โปรเจค</td><td class="price">฿60K</td><td class="price">฿150K</td><td class="price">฿350K</td><td><span class="badge b-blue">Mid–Sr</span></td></tr>
+          <tr><td class="strong">CRM Implementation (Salesforce)</td><td class="muted">Enterprise, custom objects</td><td class="muted">โปรเจค</td><td class="price">฿200K</td><td class="price">฿450K</td><td class="price">฿1.2M+</td><td><span class="badge b-red">Expert</span></td></tr>
+          <tr><td class="strong">Marketing Automation Setup</td><td class="muted">Email flows, lead scoring</td><td class="muted">โปรเจค</td><td class="price">฿35K</td><td class="price">฿80K</td><td class="price">฿200K</td><td><span class="badge b-blue">Mid</span></td></tr>
+          <tr class="cat-row"><td colspan="7">Data &amp; Analytics</td></tr>
+          <tr><td class="strong">GA4 + GTM Setup</td><td class="muted">Full GA4 + custom events + Looker</td><td class="muted">โปรเจค</td><td class="price">฿20K</td><td class="price">฿45K</td><td class="price">฿90K</td><td><span class="badge b-green">Jr–Mid</span></td></tr>
+          <tr><td class="strong">Marketing Dashboard</td><td class="muted">Looker Studio / Power BI</td><td class="muted">โปรเจค</td><td class="price">฿30K</td><td class="price">฿65K</td><td class="price">฿150K</td><td><span class="badge b-blue">Mid</span></td></tr>
+          <tr class="cat-row"><td colspan="7">Hour Rate (Ad Hoc)</td></tr>
+          <tr><td class="strong">Junior Consultant</td><td class="muted">0–3 ปีประสบการณ์</td><td class="muted">ชั่วโมง</td><td class="price">฿800</td><td class="price">฿1,200</td><td class="price">฿2,000</td><td><span class="badge b-green">Junior</span></td></tr>
+          <tr><td class="strong">Mid Consultant</td><td class="muted">3–6 ปี ชำนาญ tool</td><td class="muted">ชั่วโมง</td><td class="price">฿2,000</td><td class="price">฿3,000</td><td class="price">฿4,500</td><td><span class="badge b-blue">Mid</span></td></tr>
+          <tr><td class="strong">Senior Consultant</td><td class="muted">6+ ปี strategy + implementation</td><td class="muted">ชั่วโมง</td><td class="price">฿4,000</td><td class="price">฿5,500</td><td class="price">฿8,000</td><td><span class="badge b-amber">Senior</span></td></tr>
+          <tr><td class="strong">Expert / Partner</td><td class="muted">C-level, certified Salesforce/HubSpot</td><td class="muted">ชั่วโมง</td><td class="price">฿8,000</td><td class="price">฿12,000</td><td class="price">฿20,000+</td><td><span class="badge b-red">Expert</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── TRAINING ── -->
+  <div class="tab-content" id="tab-training">
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="card">
+        <h3 style="margin-bottom:12px;">Public Workshop — ฿/คน</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>หลักสูตร</th><th>ระยะ</th><th>ต่ำ</th><th>กลาง</th><th>สูง</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">Digital Marketing Fundamentals</td><td class="muted">1 วัน</td><td class="price">฿3,500</td><td class="price">฿5,500</td><td class="price">฿8,000</td></tr>
+              <tr><td class="strong">MarTech Overview &amp; Tools</td><td class="muted">1 วัน</td><td class="price">฿4,500</td><td class="price">฿7,000</td><td class="price">฿12,000</td></tr>
+              <tr><td class="strong">Google Analytics 4</td><td class="muted">1 วัน</td><td class="price">฿4,000</td><td class="price">฿6,500</td><td class="price">฿10,000</td></tr>
+              <tr><td class="strong">CRM &amp; Marketing Automation</td><td class="muted">1–2 วัน</td><td class="price">฿5,000</td><td class="price">฿9,000</td><td class="price">฿15,000</td></tr>
+              <tr><td class="strong">Data-Driven Marketing</td><td class="muted">2 วัน</td><td class="price">฿7,000</td><td class="price">฿12,000</td><td class="price">฿20,000</td></tr>
+              <tr><td class="strong">AI in Marketing</td><td class="muted">1 วัน</td><td class="price">฿4,500</td><td class="price">฿8,000</td><td class="price">฿14,000</td></tr>
+              <tr><td class="strong">MarTech Certificate Program</td><td class="muted">4–6 วัน</td><td class="price">฿25,000</td><td class="price">฿45,000</td><td class="price">฿80,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:12px;">In-House Corporate — ฿/กลุ่ม (15–40 คน)</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>หลักสูตร</th><th>ระยะ</th><th>ต่ำ</th><th>กลาง</th><th>สูง</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">Digital Marketing Fundamentals</td><td class="muted">1 วัน</td><td class="price">฿35K</td><td class="price">฿55K</td><td class="price">฿80K</td></tr>
+              <tr><td class="strong">MarTech Tools Workshop</td><td class="muted">1 วัน</td><td class="price">฿45K</td><td class="price">฿70K</td><td class="price">฿100K</td></tr>
+              <tr><td class="strong">CRM User Training</td><td class="muted">1 วัน</td><td class="price">฿40K</td><td class="price">฿65K</td><td class="price">฿90K</td></tr>
+              <tr><td class="strong">Data Analytics for Marketers</td><td class="muted">2 วัน</td><td class="price">฿80K</td><td class="price">฿130K</td><td class="price">฿200K</td></tr>
+              <tr><td class="strong">AI Marketing Bootcamp</td><td class="muted">1–2 วัน</td><td class="price">฿50K</td><td class="price">฿90K</td><td class="price">฿150K</td></tr>
+              <tr><td class="strong">MarTech for Executives</td><td class="muted">0.5 วัน</td><td class="price">฿40K</td><td class="price">฿70K</td><td class="price">฿120K</td></tr>
+              <tr><td class="strong">Custom Program</td><td class="muted">3–5 วัน</td><td class="price">฿150K</td><td class="price">฿280K</td><td class="price">฿500K+</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Benchmark เปรียบเทียบกับ Provider ในตลาดไทย</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Provider</th><th>ประเภท</th><th>หลักสูตรอ้างอิง</th><th>ราคา</th><th>หน่วย</th></tr></thead>
+          <tbody>
+            <tr><td class="strong">Team Digital (UTCC)</td><td><span class="badge b-blue">Public</span></td><td class="muted">Digital Marketing 2 วัน</td><td class="price">฿6,900</td><td class="muted">ต่อคน (incl. VAT)</td></tr>
+            <tr><td class="strong">TBS–Thammasat</td><td><span class="badge b-purple">Certificate</span></td><td class="muted">Digital Marketing Program</td><td class="price">฿25,000–45,000</td><td class="muted">ต่อคน/หลักสูตร</td></tr>
+            <tr><td class="strong">Biz Cube Chula</td><td><span class="badge b-blue">Public</span></td><td class="muted">Effective Digital Marketing</td><td class="price">฿15,000–25,000</td><td class="muted">ต่อคน</td></tr>
+            <tr><td class="strong">Agency In-house (mid)</td><td><span class="badge b-amber">In-house</span></td><td class="muted">Custom workshop 1 วัน</td><td class="price">฿45,000–80,000</td><td class="muted">ต่อกลุ่ม</td></tr>
+            <tr><td class="strong">MAISON48 (เป้าหมาย)</td><td><span class="badge b-dark">Target</span></td><td class="muted">Public 1 วัน</td><td class="price">฿5,000–12,000</td><td class="muted">ต่อคน</td></tr>
+            <tr><td class="strong">MAISON48 (เป้าหมาย)</td><td><span class="badge b-dark">Target</span></td><td class="muted">In-house 1 วัน</td><td class="price">฿50,000–90,000</td><td class="muted">ต่อกลุ่ม</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MARTECH STACK ── -->
+  <div class="tab-content" id="tab-stack">
+    <div class="tbl-wrap" style="margin-bottom:20px;">
+      <table>
+        <thead><tr><th>Tool / Platform</th><th>หมวด</th><th>Free / Starter</th><th>Professional</th><th>Enterprise</th><th>Implementation*</th></tr></thead>
+        <tbody>
+          <tr class="cat-row"><td colspan="6">CRM &amp; Marketing Automation</td></tr>
+          <tr><td class="strong">HubSpot</td><td><span class="badge b-blue">CRM+Auto</span></td><td class="muted">ฟรี</td><td class="price">฿3,600–18,000/เดือน</td><td class="price">฿54,000+/เดือน</td><td class="muted">฿60K–350K</td></tr>
+          <tr><td class="strong">Salesforce</td><td><span class="badge b-blue">CRM</span></td><td class="muted">฿900/user/เดือน</td><td class="price">฿3,600–9,000/user/เดือน</td><td class="price">฿18,000+/user/เดือน</td><td class="muted">฿200K–1.2M+</td></tr>
+          <tr><td class="strong">LINE Official Account</td><td><span class="badge b-green">Messaging</span></td><td class="muted">ฟรี (500 msg)</td><td class="price">฿800–1,500/เดือน</td><td class="price">฿15,000+/เดือน</td><td class="muted">฿15K–50K</td></tr>
+          <tr><td class="strong">Zoho CRM</td><td><span class="badge b-green">CRM</span></td><td class="muted">ฟรี (3 users)</td><td class="price">฿540–1,440/user/เดือน</td><td class="price">฿2,160+/user/เดือน</td><td class="muted">฿20K–80K</td></tr>
+          <tr class="cat-row"><td colspan="6">Analytics &amp; Data</td></tr>
+          <tr><td class="strong">Google Analytics 4</td><td><span class="badge b-green">Analytics</span></td><td class="muted">ฟรี</td><td class="muted">ฟรี</td><td class="price">GA4 360: ฿100K+/เดือน</td><td class="muted">฿20K–90K</td></tr>
+          <tr><td class="strong">Looker Studio</td><td><span class="badge b-green">Dashboard</span></td><td class="muted">ฟรี</td><td class="muted">ฟรี</td><td class="muted">Looker: ฿100K+/ปี</td><td class="muted">฿30K–100K</td></tr>
+          <tr><td class="strong">Power BI</td><td><span class="badge b-blue">Dashboard</span></td><td class="muted">ฟรี (desktop)</td><td class="price">฿360/user/เดือน</td><td class="price">฿7,200+/เดือน</td><td class="muted">฿30K–120K</td></tr>
+          <tr class="cat-row"><td colspan="6">AI &amp; Content</td></tr>
+          <tr><td class="strong">ChatGPT / Claude API</td><td><span class="badge b-teal">AI</span></td><td class="muted">ฟรี (limited)</td><td class="price">$20–$200/user/เดือน</td><td class="muted">API usage-based</td><td class="muted">฿20K+</td></tr>
+          <tr><td class="strong">Canva Pro</td><td><span class="badge b-teal">Creative</span></td><td class="muted">ฟรี (basic)</td><td class="price">฿450–800/user/เดือน</td><td class="price">฿1,800+/user/เดือน</td><td class="muted">ไม่ต้อง setup</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Recommended Starter Stack สำหรับ SME ไทย</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Tool</th><th>วัตถุประสงค์</th><th>ค่า License/เดือน</th><th>Priority</th></tr></thead>
+          <tbody>
+            <tr><td class="muted">1</td><td class="strong">HubSpot Starter CRM</td><td class="muted">Contact management, email</td><td class="price">ฟรี–฿1,800</td><td><span class="badge b-red">Must Have</span></td></tr>
+            <tr><td class="muted">2</td><td class="strong">Google Analytics 4</td><td class="muted">Website analytics, conversion</td><td class="price">ฟรี</td><td><span class="badge b-red">Must Have</span></td></tr>
+            <tr><td class="muted">3</td><td class="strong">Google Tag Manager</td><td class="muted">Tag management, events</td><td class="price">ฟรี</td><td><span class="badge b-red">Must Have</span></td></tr>
+            <tr><td class="muted">4</td><td class="strong">Meta Business Suite</td><td class="muted">Social media, ads</td><td class="price">ฟรี (ad spend แยก)</td><td><span class="badge b-red">Must Have</span></td></tr>
+            <tr><td class="muted">5</td><td class="strong">LINE Official Account</td><td class="muted">Customer communication</td><td class="price">฿800–1,500</td><td><span class="badge b-amber">Should Have</span></td></tr>
+            <tr><td class="muted">6</td><td class="strong">Looker Studio</td><td class="muted">Marketing dashboard</td><td class="price">ฟรี</td><td><span class="badge b-amber">Should Have</span></td></tr>
+            <tr class="subtotal"><td colspan="3">รวม License ต่อเดือน (minimum)</td><td class="price">฿1,400–6,900</td><td><span class="badge b-green">Lean Stack</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-gray" style="margin-top:12px;"><strong>Setup Fee (one-time):</strong> MAISON48 คิด ฿80,000–150,000 ครอบคลุม GA4+GTM + HubSpot config + LINE OA + Looker Studio 4–6 dashboard + Training 1 วัน</div>
+    </div>
+  </div>
+
+  <!-- ── CALCULATOR ── -->
+  <div class="tab-content" id="tab-calc">
+    <div class="calc-grid">
+      <div>
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">เลือกบริการ Consulting</div>
+        <div id="c-list">
+          <div class="svc-item" data-id="c1" data-price="65000" data-unit="โปรเจค" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">MarTech Audit &amp; Roadmap</div><div class="svc-desc">ประเมิน stack วางแผน tools</div><div class="svc-price-hint">฿35,000–120,000 / โปรเจค</div></div></div>
+          <div class="svc-item" data-id="c2" data-price="85000" data-unit="โปรเจค" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">Digital Marketing Strategy</div><div class="svc-desc">วางกลยุทธ์ 6–12 เดือน</div><div class="svc-price-hint">฿45,000–180,000 / โปรเจค</div></div></div>
+          <div class="svc-item" data-id="c3" data-price="150000" data-unit="โปรเจค" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">CRM Implementation (HubSpot)</div><div class="svc-desc">Setup + migration + automation</div><div class="svc-price-hint">฿60,000–350,000 / โปรเจค</div></div></div>
+          <div class="svc-item" data-id="c4" data-price="80000" data-unit="โปรเจค" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">Marketing Automation Setup</div><div class="svc-desc">Email flows + lead scoring</div><div class="svc-price-hint">฿35,000–200,000 / โปรเจค</div></div></div>
+          <div class="svc-item" data-id="c5" data-price="80000" data-unit="เดือน" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">Retainer — Strategy &amp; Ops</div><div class="svc-desc">Virtual MarTech Advisor รายเดือน</div><div class="svc-price-hint">฿40,000–150,000 / เดือน</div></div></div>
+          <div class="svc-item" data-id="c6" data-price="45000" data-unit="โปรเจค" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">GA4 + Dashboard Setup</div><div class="svc-desc">GA4 + GTM + Looker Studio</div><div class="svc-price-hint">฿20,000–90,000 / โปรเจค</div></div></div>
+        </div>
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 10px;">เลือกบริการ Training</div>
+        <div id="t-list">
+          <div class="svc-item" data-id="t1" data-price="7000" data-unit="คน" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">Public Workshop (1 วัน)</div><div class="svc-desc">ต่อคน</div><div class="svc-price-hint">฿5,000–12,000 / คน</div></div></div>
+          <div class="svc-item" data-id="t2" data-price="70000" data-unit="กลุ่ม" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">In-House Workshop (1 วัน)</div><div class="svc-desc">Corporate training ต่อกลุ่ม</div><div class="svc-price-hint">฿45,000–100,000 / กลุ่ม</div></div></div>
+          <div class="svc-item" data-id="t3" data-price="130000" data-unit="กลุ่ม" onclick="toggleSvc(this)"><div class="svc-check"><svg width="9" height="7" viewBox="0 0 10 8" fill="none" style="display:none;"><path d="M1 4L4 7L9 1" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="svc-name">In-House Program (2 วัน)</div><div class="svc-desc">Data analytics หรือ CRM เชิงลึก</div><div class="svc-price-hint">฿80,000–200,000 / กลุ่ม</div></div></div>
+        </div>
+        <hr>
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">ปรับจำนวน</div>
+        <div class="sl-wrap"><div class="sl-head"><span class="sl-name">จำนวนเดือน (สำหรับ retainer)</span><span class="sl-val" id="v-months">3 เดือน</span></div><input type="range" min="1" max="12" value="3" oninput="document.getElementById('v-months').textContent=this.value+' เดือน';calcQuote();"></div>
+        <div class="sl-wrap"><div class="sl-head"><span class="sl-name">จำนวนผู้เข้าอบรม (public)</span><span class="sl-val" id="v-pax">20 คน</span></div><input type="range" min="1" max="100" value="20" oninput="document.getElementById('v-pax').textContent=this.value+' คน';calcQuote();"></div>
+        <div class="sl-wrap"><div class="sl-head"><span class="sl-name">Complexity Multiplier</span><span class="sl-val" id="v-mult">1.0×</span></div><input type="range" min="80" max="150" value="100" oninput="document.getElementById('v-mult').textContent=(this.value/100).toFixed(1)+'×';calcQuote();"></div>
+      </div>
+
+      <div>
+        <div class="quote-box" id="quote-box">
+          <div class="quote-title">Quote Summary</div>
+          <div id="quote-lines"><div style="font-size:13px;color:#888068;padding:16px 0;text-align:center;">เลือกบริการทางซ้ายเพื่อสร้าง quote</div></div>
+          <div id="quote-total-wrap" style="display:none;">
+            <div class="quote-total">
+              <div><div class="quote-total-lbl">รวมก่อน VAT</div><div class="quote-total-val" id="qt-val">฿0</div></div>
+              <div style="text-align:right;"><div class="quote-total-lbl">รวม VAT 7%</div><div style="font-size:16px;font-weight:300;color:#c8c2b0;margin-top:4px;" id="qt-vat">฿0</div></div>
+            </div>
+          </div>
+          <div class="quote-note" id="quote-note"></div>
+          <div class="quote-check" id="quote-check">เลือกบริการเพื่อตรวจสอบ Arm's Length</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  MAISON48 Co., Ltd. · MarTech Rate Card · Thailand 2025–2026<br>
+  ราคาอ้างอิงเพื่อ Arm's Length Pricing ตาม MOU · อัปเดต มีนาคม 2026 · <a href="mailto:hello@maison48.co">hello@maison48.co</a>
+</footer>
+
+<script>
+// TAB SWITCHING
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// CALCULATOR
+const sel = {};
+function toggleSvc(el) {
+  const id = el.dataset.id;
+  const price = +el.dataset.price;
+  const unit = el.dataset.unit;
+  const name = el.querySelector('.svc-name').textContent;
+  if (sel[id]) {
+    delete sel[id];
+    el.classList.remove('selected');
+    el.querySelector('svg').style.display = 'none';
+  } else {
+    sel[id] = { price, unit, name };
+    el.classList.add('selected');
+    el.querySelector('svg').style.display = 'block';
+  }
+  calcQuote();
+}
+
+function fmt(n) { return '฿' + Math.abs(Math.round(n)).toLocaleString('th-TH'); }
+
+function calcQuote() {
+  const months = +document.querySelector('input[oninput*="v-months"]').value;
+  const pax = +document.querySelector('input[oninput*="v-pax"]').value;
+  const mult = +document.querySelector('input[oninput*="v-mult"]').value / 100;
+  const lines = document.getElementById('quote-lines');
+  const totalWrap = document.getElementById('quote-total-wrap');
+  const noteEl = document.getElementById('quote-note');
+  const checkEl = document.getElementById('quote-check');
+
+  if (!Object.keys(sel).length) {
+    lines.innerHTML = '<div style="font-size:13px;color:#888068;padding:16px 0;text-align:center;">เลือกบริการทางซ้ายเพื่อสร้าง quote</div>';
+    totalWrap.style.display = 'none'; noteEl.textContent = '';
+    checkEl.textContent = 'เลือกบริการเพื่อตรวจสอบ Arm\'s Length'; checkEl.className = 'quote-check';
+    return;
+  }
+
+  let html = ''; let total = 0;
+  for (const [id, item] of Object.entries(sel)) {
+    let qty = 1, ql = '';
+    if (item.unit === 'เดือน') { qty = months; ql = `× ${months} เดือน`; }
+    else if (item.unit === 'คน') { qty = pax; ql = `× ${pax} คน`; }
+    const sub = Math.round(item.price * qty * mult);
+    total += sub;
+    html += `<div class="quote-line"><div><div class="quote-name">${item.name}</div><div style="font-size:10px;color:#666;margin-top:1px;">${fmt(item.price)} ${item.unit} ${ql}${mult!==1?' × '+mult.toFixed(1):''}</div></div><div class="quote-amt">${fmt(sub)}</div></div>`;
+  }
+  lines.innerHTML = html;
+  totalWrap.style.display = 'block';
+  const vat = Math.round(total * 0.07);
+  document.getElementById('qt-val').textContent = fmt(total);
+  document.getElementById('qt-vat').textContent = fmt(total + vat);
+
+  const beClients = Math.ceil((+document.querySelector('input[oninput*="v-sal"]')?.value || 350000)*12 / (150000 * 0.45)) || 8;
+  noteEl.textContent = ['ราคาไม่รวม ad spend และ tool license', Object.values(sel).some(s=>s.unit==='เดือน')?`Retainer ${months} เดือน`:'', Object.values(sel).some(s=>s.id==='t1')?`Public ${pax} คน`:'', mult!==1?`Complexity ${mult.toFixed(1)}×`:''].filter(Boolean).join(' · ');
+
+  if (total >= 15000) {
+    checkEl.innerHTML = '✓ ราคาอยู่ในช่วงตลาด — เหมาะสำหรับ MOU กับมหาวิทยาลัย';
+    checkEl.className = 'quote-check ok';
+  } else {
+    checkEl.innerHTML = '⚠ ราคาต่ำกว่าตลาด — ต้องมีเหตุผลประกอบเพื่อ Arm\'s Length';
+    checkEl.className = 'quote-check';
+  }
+}
+</script>
+</body>
+</html>
